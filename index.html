@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Cigars</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Favorite Cigars</h1>
+        <form id="cigarForm">
+            <div class="form-group">
+                <label for="name">Cigar Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="size">Cigar Size:</label>
+                <input type="text" id="size" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Cigar Company:</label>
+                <input type="text" id="company" required>
+            </div>
+            <div class="form-group">
+                <label for="filler">Filler:</label>
+                <input type="text" id="filler" required>
+            </div>
+            <div class="form-group">
+                <label for="wrapper">Wrapper:</label>
+                <input type="text" id="wrapper" required>
+            </div>
+            <div class="form-group">
+                <label for="binder">Binder:</label>
+                <input type="text" id="binder" required>
+            </div>
+            <div class="form-group">
+                <label for="quality">Quality:</label>
+                <input type="text" id="quality" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea id="notes"></textarea>
+            </div>
+            <button type="submit">Add Cigar</button>
+        </form>
+
+        <table id="cigarTable">
+            <thead>
+                <tr>
+                    <th>Cigar Name</th>
+                    <th>Cigar Size</th>
+                    <th>Cigar Company</th>
+                    <th>Filler</th>
+                    <th>Wrapper</th>
+                    <th>Binder</th>
+                    <th>Quality</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cigars will be listed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
