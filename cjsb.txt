@@ -1,0 +1,9 @@
+cigar journal supabase
+
+PROJECT URL:
+https://luwtatdmiqisbqvunfit.supabase.co
+
+
+anon public key (client side use):
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1d3RhdGRtaXFpc2JxdnVuZml0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjIxNjUsImV4cCI6MjA3MjEzODE2NX0.zJxKcPRXEDVq7mMlg1WjjQBvEH3iPuAVN-zZ0NclpVQ

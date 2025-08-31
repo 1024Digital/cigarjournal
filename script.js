@@ -1,30 +1,94 @@
-document.getElementById('cigarForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+// Replace with your actual values from Supabase Dashboard
+const SUPABASE_URL = 'https://luwtatdmiqisbqvunfit.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1d3RhdGRtaXFpc2JxdnVuZml0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjIxNjUsImV4cCI6MjA3MjEzODE2NX0.zJxKcPRXEDVq7mMlg1WjjQBvEH3iPuAVN-zZ0NclpVQ';
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Get form values
-    const name = document.getElementById('name').value;
-    const size = document.getElementById('size').value;
-    const company = document.getElementById('company').value;
-    const filler = document.getElementById('filler').value;
-    const wrapper = document.getElementById('wrapper').value;
-    const binder = document.getElementById('binder').value;
-    const quality = document.getElementById('quality').value;
-    const notes = document.getElementById('notes').value;
+const form = document.getElementById('cigarForm');
+const tableBody = document.getElementById('cigarTableBody');
 
-    // Create a new row
-    const table = document.getElementById('cigarTable').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+// Fetch and display cigars
+async function loadCigars() {
+  const { data, error } = await supabase.from('cigars').select('*');
+  if (error) {
+    console.error('Error loading cigars:', error.message);
+    alert("Failed to load cigars.");
+    return;
+  }
+  tableBody.innerHTML = '';
+  data.forEach(appendCigarRow);
+}
 
-    // Insert cells
-    newRow.insertCell(0).textContent = name;
-    newRow.insertCell(1).textContent = size;
-    newRow.insertCell(2).textContent = company;
-    newRow.insertCell(3).textContent = filler;
-    newRow.insertCell(4).textContent = wrapper;
-    newRow.insertCell(5).textContent = binder;
-    newRow.insertCell(6).textContent = quality;
-    newRow.insertCell(7).textContent = notes;
+loadCigars();
 
-    // Clear the form
-    document.getElementById('cigarForm').reset();
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const cigar = {
+    name: document.getElementById('cigarName').value,
+    size: document.getElementById('cigarSize').value,
+    brand: document.getElementById('cigarBrand').value,
+    binder: document.getElementById('Binder').value,
+    filler: document.getElementById('Filler').value,
+    wrapper: document.getElementById('Wrapper').value,
+    origin: document.getElementById('Origin').value,
+    rating: parseInt(document.getElementById('Rating').value),
+    notes: document.getElementById('Notes').value
+  };
+
+  const button = e.target.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.innerText = "Saving...";
+
+  const { data, error } = await supabase.from('cigars').insert([cigar]);
+
+  button.disabled = false;
+  button.innerText = "Add";
+
+  if (error) {
+    console.error("Insert failed:", error.message);
+    alert("Failed to add cigar.");
+  } else {
+    appendCigarRow(data[0]);
+    form.reset();
+    alert("Cigar added successfully!");
+  }
 });
+
+
+function appendCigarRow(cigar) {
+  const row = document.createElement('tr');
+  row.setAttribute('data-id', cigar.id);
+  row.innerHTML = `
+    <td>${cigar.name}</td>
+    <td>${cigar.size}</td>
+    <td>${cigar.brand}</td>
+    <td>${cigar.binder}</td>
+    <td>${cigar.filler}</td>
+    <td>${cigar.wrapper}</td>
+    <td>${cigar.origin}</td>
+    <td>${cigar.rating}</td>
+    <td>${cigar.notes}</td>
+    <td><button class="btn btn-sm btn-danger delete-btn">Delete</button></td>
+  `;
+  tableBody.appendChild(row);
+}
+
+// Delete cigar from Supabase
+tableBody.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const row = e.target.closest('tr');
+    const id = row.getAttribute('data-id');
+
+    if (!confirm("Are you sure you want to delete this cigar entry?")) return;
+
+    const { error } = await supabase.from('cigars').delete().eq('id', id);
+    if (error) {
+      console.error('Delete error:', error.message);
+      alert("Failed to delete cigar.");
+    } else {
+      row.remove();
+      alert("Cigar deleted.");
+    }
+  }
+});
+

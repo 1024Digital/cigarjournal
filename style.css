@@ -1,83 +1,234 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+:root {
+ --dark-brown: #2C1A1A;
+ --medium-brown: #5C3E2A;
+--light-cream: #F5F5DC;
+--muted-gold: #B8860B;
 }
 
+/*
+var(--dark-brown);
+var(--medium-brown);
+var(--light-cream); 
+var(--muted-gold);
+*/
+
+
+body{
+    width:75%;
+    margin:auto;
+    background-color: black;
+}
+.navbar{
+    background-color: var(--medium-brown);
+}
+
+.navbar-dark .navbar-brand{color:var(--muted-gold)}
+
+.brand_text{
+    font-family: 'Playwrite CA', cursive;
+    font-weight: 400;
+    font-size: 2rem;
+    color:var(--muted-gold);
+}
+
+.titleRow{
+    background-color: var(--dark-brown);
+
+}
+    
+.logo{
+    width: 100px;
+    height: auto;
+
+}
+.title{text-align: center;
+    color:var(--muted-gold);
+     font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.cigar_card{
+    background-color:var( --medium-brown);
+    margin-top:10px;
+}
+.cigar_table{
+ margin-top:10px;
+}
+
+input[type="text"]{
+    background-color: var(--dark-brown);
+    color:var(--light-cream);
+}
+textarea {
+  background-color:var(--dark-brown);
+}
+#Notes{
+    background-color:var(--dark-brown);
+    color:var(--light-cream);
+}
+.card_font{
+    color:var(--light-cream)
+}
+
+.footer{
+    background-color: var(--medium-brown);
+    color:var(--muted-gold);
+    margin-top:20px;
+    padding:10px;
+    text-align:center;
+}
+
+
+.logo1024 {
+    width: 100px;
+    height: 100px;
+    filter: brightness(100);
+    -webkit-filter: brightness(100);
+    padding-top: 0.5rem;
+}
+
+
+@media screen and (max-width: 989px) {
+  .logo{
+    display:none;
+  }
+}
+
+
+/*
+Variables
+need the root selector
+:root{
+ --dark-brown: #2C1A1A;
+ --medium-brown: #5C3E2A;
+--light-cream: #F5F5DC;
+-- muted-gold: #B8860B;
+}
+
+to call the var
 .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: var(--blue);
+  background-color: var(--white);
+  padding: 15px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+
+Fonts : 
+
+.playwrite-ca-<uniquifier> {
+  font-family: "Playwrite CA", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+---------------------------------------
+.kanit-thin {
+  font-family: "Kanit", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
 
-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 20px;
+.kanit-extralight {
+  font-family: "Kanit", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
-.form-group {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
+.kanit-light {
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
-label {
-    margin-bottom: 5px;
+.kanit-regular {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-input, textarea, button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.kanit-medium {
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
-button {
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s ease;
+.kanit-semibold {
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
-button:hover {
-    background-color: #0056b3;
+.kanit-bold {
+  font-family: "Kanit", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.kanit-extrabold {
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+  font-style: normal;
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
+.kanit-black {
+  font-family: "Kanit", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
-th {
-    background-color: #007bff;
-    color: #fff;
+.kanit-thin-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 100;
+  font-style: italic;
 }
 
-@media (max-width: 768px) {
-    .form-group {
-        flex: 1 1 100%;
-    }
+.kanit-extralight-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 200;
+  font-style: italic;
 }
 
-@media (max-width: 480px) {
-    table, th, td {
-        font-size: 14px;
-    }
+.kanit-light-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+  font-style: italic;
 }
+
+.kanit-regular-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.kanit-medium-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.kanit-semibold-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.kanit-bold-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.kanit-extrabold-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.kanit-black-italic {
+  font-family: "Kanit", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+*/

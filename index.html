@@ -1,69 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favorite Cigars</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Favorite Cigars</h1>
-        <form id="cigarForm">
-            <div class="form-group">
-                <label for="name">Cigar Name:</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="size">Cigar Size:</label>
-                <input type="text" id="size" required>
-            </div>
-            <div class="form-group">
-                <label for="company">Cigar Company:</label>
-                <input type="text" id="company" required>
-            </div>
-            <div class="form-group">
-                <label for="filler">Filler:</label>
-                <input type="text" id="filler" required>
-            </div>
-            <div class="form-group">
-                <label for="wrapper">Wrapper:</label>
-                <input type="text" id="wrapper" required>
-            </div>
-            <div class="form-group">
-                <label for="binder">Binder:</label>
-                <input type="text" id="binder" required>
-            </div>
-            <div class="form-group">
-                <label for="quality">Quality:</label>
-                <input type="text" id="quality" required>
-            </div>
-            <div class="form-group">
-                <label for="notes">Notes:</label>
-                <textarea id="notes"></textarea>
-            </div>
-            <button type="submit">Add Cigar</button>
-        </form>
 
-        <table id="cigarTable">
-            <thead>
-                <tr>
-                    <th>Cigar Name</th>
-                    <th>Cigar Size</th>
-                    <th>Cigar Company</th>
-                    <th>Filler</th>
-                    <th>Wrapper</th>
-                    <th>Binder</th>
-                    <th>Quality</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Cigars will be listed here -->
-            </tbody>
-        </table>
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>Cigar Journal</title>
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="Favicon_cj.png">
+    <!-- Required meta tags -->
+      <meta name="description" content="">
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playwrite+CA:wght@100..400&display=swap" rel="stylesheet">
+    <!-- Add this to your HTML inside <head> -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  </head>
+
+  <body>
+    <div class="container-sm">
+            <nav class="navbar navbar-expand-lg navbar-dark nav_text">
+                <a class="navbar-brand brand_text" href="#">CJ</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <!-- 
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    -->
+                   
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        News
+                        </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="https://www.cigaraficionado.com/news" target="_blank" rel="noopener noreferrer">Cigar Aficionado</a>
+                        <a class="dropdown-item" href="https://www.cigarjournal.com/cigar-news/" target="_blank" rel="noopener noreferrer">Cigar Journal</a>
+                        <a class="dropdown-item" href="https://cigar-coop.com/category/cigar-news" target="_blank" rel="noopener noreferrer">Cigar Coop</a>
+                        <a class="dropdown-item" href="https://halfwheel.com/category/news/" target="_blank" rel="noopener noreferrer">Half Wheel</a>
+                        <a class="dropdown-item" href="https://cigarpress.com/" target="_blank" rel="noopener noreferrer">Cigar Press</a>
+                        <!--<div class="dropdown-divider">STORES</div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        -->
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Stores
+                        </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="https://www.famous-smoke.com/" target="_blank" rel="noopener noreferrer">Famous Smokes Shop</a>
+                        <a class="dropdown-item" href="https://www.cigarsinternational.com/" target="_blank" rel="noopener noreferrer">Cigar's International</a>
+                        <a class="dropdown-item" href="https://www.holts.com/" target="_blank" rel="noopener noreferrer">Holt's Cigar Co</a>
+                        <a class="dropdown-item" href="https://mikescigars.com/" target="_blank" rel="noopener noreferrer">Mike's Cigars</a>
+                        <a class="dropdown-item" href="https://www.jrcigars.com/" target="_blank" rel="noopener noreferrer">JR Cigars</a>
+                        <a class="dropdown-item" href="https://www.cigarbid.com/" target="_blank" rel="noopener noreferrer">Cigar Bid</a>
+                        <a class="dropdown-item" href="https://www.cigarauctioneer.com/" target="_blank" rel="noopener noreferrer">Cigar Auctioneer</a>
+                        <!--<div class="dropdown-divider">STORES</div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        -->
+                        </div>
+                    </li>
+                    
+                    </ul>
+                    
+                </div>
+                </nav>
+    </div>
+    
+
+
+    <div class="container-fluid titleRow">
+        <div class="row px-5">
+        <div class="col-2 p-3"><img src="cigarwbook.png" class="rounded-circle logo" alt=""></div>
+        <div class="col-lg-8 d-flex justify-content-center align-self-center title"> <h1>Cigar Journal Beta </h1></div>
+        </div>   
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <div class="container-fluid pt-3 pb-3 cigar_card">
+        <div>
+            <form id="cigarForm">
+                <div class="form-inline d-flex flex-wrap justify-content-around pb-3">
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="cigarName" placeholder="Cigar Name">
+                        <label for="cigarName"></label>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="cigarSize" placeholder="Cigar Size">
+                        <label for="cigarSize"></label>
+                     </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="cigarBrand" placeholder="Cigar Brand">
+                        <label for="cigarBrand"></label>
+                    </div>
+                     <div class="form-group">
+                        <label for="Rating" class="card_font mr-1"><span>Rating 1-5 </span></label>
+                        <select class="form-control" id="Rating" placeholder="Rating">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>   
+                <div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="Binder" placeholder="Binder">
+                                <label for="Binder"></label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="Filler" placeholder="Filler">
+                                <label for="Filler"></label>
+                            </div> 
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="Wrapper" placeholder="Wrapper">
+                                <label for="Wrapper"></label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="Origin" placeholder="Origin">
+                                <label for="Origin"></label>
+                            </div>
+                    </div>          
+                </div>
+                <div class="form-group">
+                    <label for="comment" class="card_font">Notes</label>
+                    <textarea class="form-control" rows="2" id="Notes"></textarea>
+
+                </div>
+                <div class="row d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive cigar_table">
+        <table class="table table-dark table-hover justify-content-center">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Brand</th>
+                    <th>Binder</th>
+                    <th>Filler</th>
+                    <th>Wrapper</th>
+                    <th>Origin</th>
+                    <th>Rating</th>
+                    <th>Notes</th>
+                </tr>
+                <tbody>
+                    <tr>
+                    <td>Vintage 1990</td>
+                    <td>Robusto</td>
+                    <td>Rocky Patel</td>
+                    <td>Nicaragua</td>
+                    <td>Dominican /  Nicaragua</td>
+                    <td>Honduran</td>
+                    <td>Honduran</td>
+                    <td>5</td>
+                    <td>Smooth , Fav cigar (example)</td>
+                </tr>
+                </tbody> 
+            
+                <tbody id="cigarTableBody">
+                </tbody>
+
+            </thead>
+        </table>
+
+    </div>
+    <div class="container-sm footer">
+        <footer class="page-footer font-small blue pt-4 mt-4">
+            <div class="footer-copyright text-center py-3">
+                <img class="logo1024" src="1024_logo_lg.png" alt="1024 Digital Media Logo">
+                <p class="">© 2024 Copyright:</p>
+            </div>
+        </footer>
+    </div>
+
+
+
+
+
+      
+    <!-- Optional JavaScript -->
+     <script src="script.js" async defer></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
