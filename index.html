@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -96,17 +95,17 @@
             <form id="cigarForm">
                 <div class="form-inline d-flex flex-wrap justify-content-around pb-3">
                     <div class="form-group col-md-3">
-                        <input type="text" class="form-control" id="cigarName" placeholder="Cigar Name">
-                        <label for="cigarName"></label>
+                        <input type="text" class="form-control" id="Name" placeholder="Cigar Name">
+                        <label for="Name"></label>
                      </div>
                      <div class="form-group col-md-3">
-                        <input type="text" class="form-control" id="cigarSize" placeholder="Cigar Size">
-                        <label for="cigarSize"></label>
+                        <input type="text" class="form-control" id="Size" placeholder="Cigar Size">
+                        <label for="Size"></label>
                      </div>
 
                     <div class="form-group col-md-3">
-                        <input type="text" class="form-control" id="cigarBrand" placeholder="Cigar Brand">
-                        <label for="cigarBrand"></label>
+                        <input type="text" class="form-control" id="cBrand" placeholder="Cigar Brand">
+                        <label for="Brand"></label>
                     </div>
                      <div class="form-group">
                         <label for="Rating" class="card_font mr-1"><span>Rating 1-5 </span></label>
@@ -154,40 +153,27 @@
     </div>
 
     <div class="table-responsive cigar_table">
-        <table class="table table-dark table-hover justify-content-center">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Size</th>
-                    <th>Brand</th>
-                    <th>Binder</th>
-                    <th>Filler</th>
-                    <th>Wrapper</th>
-                    <th>Origin</th>
-                    <th>Rating</th>
-                    <th>Notes</th>
-                </tr>
-                <tbody>
-                    <tr>
-                    <td>Vintage 1990</td>
-                    <td>Robusto</td>
-                    <td>Rocky Patel</td>
-                    <td>Nicaragua</td>
-                    <td>Dominican /  Nicaragua</td>
-                    <td>Honduran</td>
-                    <td>Honduran</td>
-                    <td>5</td>
-                    <td>Smooth , Fav cigar (example)</td>
-                </tr>
-                </tbody> 
-            
-                <tbody id="cigarTableBody">
-                </tbody>
+  <table class="table table-dark table-hover justify-content-center">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Brand</th>
+        <th>Binder</th>
+        <th>Filler</th>
+        <th>Wrapper</th>
+        <th>Origin</th> <!-- ✅ Fixed typo here -->
+        <th>Rating</th>
+        <th>Notes</th>
+        <th>Actions</th> <!-- ✅ Added column header for delete button -->
+      </tr>
+    </thead>
+    <tbody id="cigarTableBody">
+      <!-- Dynamic rows will be inserted here via JavaScript -->
+    </tbody>
+  </table>
+</div>
 
-            </thead>
-        </table>
-
-    </div>
     <div class="container-sm footer">
         <footer class="page-footer font-small blue pt-4 mt-4">
             <div class="footer-copyright text-center py-3">

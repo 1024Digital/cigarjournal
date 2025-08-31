@@ -24,9 +24,9 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const cigar = {
-    name: document.getElementById('cigarName').value,
-    size: document.getElementById('cigarSize').value,
-    brand: document.getElementById('cigarBrand').value,
+    name: document.getElementById('Name').value,
+    size: document.getElementById('Size').value,
+    brand: document.getElementById('Brand').value,
     binder: document.getElementById('Binder').value,
     filler: document.getElementById('Filler').value,
     wrapper: document.getElementById('Wrapper').value,
@@ -59,15 +59,15 @@ function appendCigarRow(cigar) {
   const row = document.createElement('tr');
   row.setAttribute('data-id', cigar.id);
   row.innerHTML = `
-    <td>${cigar.name}</td>
-    <td>${cigar.size}</td>
-    <td>${cigar.brand}</td>
-    <td>${cigar.binder}</td>
-    <td>${cigar.filler}</td>
-    <td>${cigar.wrapper}</td>
-    <td>${cigar.origin}</td>
-    <td>${cigar.rating}</td>
-    <td>${cigar.notes}</td>
+    <td>${cigar.Name}</td>
+    <td>${cigar.Size}</td>
+    <td>${cigar.Brand}</td>
+    <td>${cigar.Binder}</td>
+    <td>${cigar.Filler}</td>
+    <td>${cigar.Wrapper}</td>
+    <td>${cigar.Origin}</td>
+    <td>${cigar.Rating}</td>
+    <td>${cigar.Notes}</td>
     <td><button class="btn btn-sm btn-danger delete-btn">Delete</button></td>
   `;
   tableBody.appendChild(row);
