@@ -47,6 +47,8 @@ body{
     font-weight: 700;
     font-style: normal;
 }
+
+/* Form Styles */
 .cigar_card{
     background-color:var( --medium-brown);
     margin-top:10px;
@@ -70,6 +72,7 @@ textarea {
     color:var(--light-cream)
 }
 
+/* Button Styles */
 .btn-danger {
   background-color: #b22222;
   border: none;
@@ -78,6 +81,15 @@ textarea {
   background-color: #ff4444;
 }
 
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Footer Styles */
 
 .footer{
     background-color: var(--medium-brown);
@@ -95,6 +107,7 @@ textarea {
     padding-top: 0.5rem;
 }
 
+/* Responsive Design */
 
 @media screen and (max-width: 989px) {
   .logo{

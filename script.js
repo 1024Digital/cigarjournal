@@ -83,4 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
     editIndex = index;
     submitBtn.textContent = "Update";
   };
+document.getElementById('exportExcelBtn').addEventListener('click', () => {
+  const cigars = JSON.parse(localStorage.getItem('cigars')) || [];
+
+  if (cigars.length === 0) {
+    alert("No records to export.");
+    return;
+  }
+
+  // Convert array of objects to worksheet
+  const worksheet = XLSX.utils.json_to_sheet(cigars);
+
+  // Create a new workbook and append worksheet
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Cigar Journal");
+
+  // Save to file
+  XLSX.writeFile(workbook, "Cigar_Journal.xlsx");
+});
+
+
 });
