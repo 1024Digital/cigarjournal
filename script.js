@@ -1,94 +1,86 @@
-// Replace with your actual values from Supabase Dashboard
-const SUPABASE_URL = 'https://luwtatdmiqisbqvunfit.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1d3RhdGRtaXFpc2JxdnVuZml0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjIxNjUsImV4cCI6MjA3MjEzODE2NX0.zJxKcPRXEDVq7mMlg1WjjQBvEH3iPuAVN-zZ0NclpVQ';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('cigarForm');
+  const tableBody = document.getElementById('cigarTableBody');
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-const form = document.getElementById('cigarForm');
-const tableBody = document.getElementById('cigarTableBody');
+  let cigars = JSON.parse(localStorage.getItem('cigars')) || [];
+  let editIndex = null;
 
-// Fetch and display cigars
-async function loadCigars() {
-  const { data, error } = await supabase.from('cigars').select('*');
-  if (error) {
-    console.error('Error loading cigars:', error.message);
-    alert("Failed to load cigars.");
-    return;
+  // Render all saved cigars
+  cigars.forEach((cigar, index) => renderCigarRow(cigar, index));
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const cigar = {
+      name: document.getElementById('cigarName').value.trim(),
+      size: document.getElementById('cigarSize').value.trim(),
+      brand: document.getElementById('cigarBrand').value.trim(),
+      binder: document.getElementById('Binder').value.trim(),
+      filler: document.getElementById('Filler').value.trim(),
+      wrapper: document.getElementById('Wrapper').value.trim(),
+      origin: document.getElementById('Origin').value.trim(),
+      rating: document.getElementById('Rating').value,
+      notes: document.getElementById('Notes').value.trim()
+    };
+
+    if (editIndex === null) {
+      cigars.push(cigar);
+    } else {
+      cigars[editIndex] = cigar;
+      editIndex = null;
+      submitBtn.textContent = "Add";
+    }
+
+    localStorage.setItem('cigars', JSON.stringify(cigars));
+    renderTable();
+    form.reset();
+  });
+
+  function renderTable() {
+    tableBody.innerHTML = '';
+    cigars.forEach((cigar, index) => renderCigarRow(cigar, index));
   }
-  tableBody.innerHTML = '';
-  data.forEach(appendCigarRow);
-}
 
-loadCigars();
+  function renderCigarRow(cigar, index) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${cigar.name}</td>
+      <td>${cigar.size}</td>
+      <td>${cigar.brand}</td>
+      <td>${cigar.binder}</td>
+      <td>${cigar.filler}</td>
+      <td>${cigar.wrapper}</td>
+      <td>${cigar.origin}</td>
+      <td>${cigar.rating}</td>
+      <td>${cigar.notes}</td>
+      <td>
+        <button class="btn btn-sm btn-warning mr-1" onclick="editCigar(${index})">Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteCigar(${index})">Delete</button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  }
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const cigar = {
-    name: document.getElementById('Name').value,
-    size: document.getElementById('Size').value,
-    brand: document.getElementById('Brand').value,
-    binder: document.getElementById('Binder').value,
-    filler: document.getElementById('Filler').value,
-    wrapper: document.getElementById('Wrapper').value,
-    origin: document.getElementById('Origin').value,
-    rating: parseInt(document.getElementById('Rating').value),
-    notes: document.getElementById('Notes').value
+  window.deleteCigar = function (index) {
+    cigars.splice(index, 1);
+    localStorage.setItem('cigars', JSON.stringify(cigars));
+    renderTable();
   };
 
-  const button = e.target.querySelector('button[type="submit"]');
-  button.disabled = true;
-  button.innerText = "Saving...";
+  window.editCigar = function (index) {
+    const cigar = cigars[index];
+    document.getElementById('cigarName').value = cigar.name;
+    document.getElementById('cigarSize').value = cigar.size;
+    document.getElementById('cigarBrand').value = cigar.brand;
+    document.getElementById('Binder').value = cigar.binder;
+    document.getElementById('Filler').value = cigar.filler;
+    document.getElementById('Wrapper').value = cigar.wrapper;
+    document.getElementById('Origin').value = cigar.origin;
+    document.getElementById('Rating').value = cigar.rating;
+    document.getElementById('Notes').value = cigar.notes;
 
-  const { data, error } = await supabase.from('cigars').insert([cigar]);
-
-  button.disabled = false;
-  button.innerText = "Add";
-
-  if (error) {
-    console.error("Insert failed:", error.message);
-    alert("Failed to add cigar.");
-  } else {
-    appendCigarRow(data[0]);
-    form.reset();
-    alert("Cigar added successfully!");
-  }
+    editIndex = index;
+    submitBtn.textContent = "Update";
+  };
 });
-
-
-function appendCigarRow(cigar) {
-  const row = document.createElement('tr');
-  row.setAttribute('data-id', cigar.id);
-  row.innerHTML = `
-    <td>${cigar.Name}</td>
-    <td>${cigar.Size}</td>
-    <td>${cigar.Brand}</td>
-    <td>${cigar.Binder}</td>
-    <td>${cigar.Filler}</td>
-    <td>${cigar.Wrapper}</td>
-    <td>${cigar.Origin}</td>
-    <td>${cigar.Rating}</td>
-    <td>${cigar.Notes}</td>
-    <td><button class="btn btn-sm btn-danger delete-btn">Delete</button></td>
-  `;
-  tableBody.appendChild(row);
-}
-
-// Delete cigar from Supabase
-tableBody.addEventListener('click', async (e) => {
-  if (e.target.classList.contains('delete-btn')) {
-    const row = e.target.closest('tr');
-    const id = row.getAttribute('data-id');
-
-    if (!confirm("Are you sure you want to delete this cigar entry?")) return;
-
-    const { error } = await supabase.from('cigars').delete().eq('id', id);
-    if (error) {
-      console.error('Delete error:', error.message);
-      alert("Failed to delete cigar.");
-    } else {
-      row.remove();
-      alert("Cigar deleted.");
-    }
-  }
-});
-
