@@ -130,5 +130,34 @@ document.getElementById('importExcelInput').addEventListener('change', function 
   reader.readAsArrayBuffer(file);
 });
 
+let currentSortColumn = null;
+let currentSortDirection = 'asc';
+
+window.sortTableBy = function (column) {
+  if (currentSortColumn === column) {
+    currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    currentSortColumn = column;
+    currentSortDirection = 'asc';
+  }
+
+  cigars.sort((a, b) => {
+    let valA = a[column]?.toString().toLowerCase() || '';
+    let valB = b[column]?.toString().toLowerCase() || '';
+
+    if (!isNaN(valA) && !isNaN(valB)) {
+      valA = parseFloat(valA);
+      valB = parseFloat(valB);
+    }
+
+    if (valA < valB) return currentSortDirection === 'asc' ? -1 : 1;
+    if (valA > valB) return currentSortDirection === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  renderTable();
+};
+
+
 
 });

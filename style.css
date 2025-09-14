@@ -72,6 +72,18 @@ textarea {
     color:var(--light-cream)
 }
 
+/* Table Sort */
+th {
+  user-select: none;
+}
+
+th:hover {
+  text-decoration: underline;
+  color: var(--muted-gold);
+}
+
+
+
 /* Button Styles */
 /* Delete & Edit */
 .btn-danger {

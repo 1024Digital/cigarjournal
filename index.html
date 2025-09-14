@@ -156,17 +156,18 @@
         <table class="table table-dark table-hover justify-content-center">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Size</th>
-                    <th>Brand</th>
-                    <th>Binder</th>
-                    <th>Filler</th>
-                    <th>Wrapper</th>
-                    <th>Orgin</th>
-                    <th>Rating</th>
-                    <th>Notes</th>
-                    <th>Action</th>
-                </tr>
+                   <tr>
+    <th onclick="sortTableBy('name')" style="cursor: pointer;">Name</th>
+    <th onclick="sortTableBy('size')" style="cursor: pointer;">Size</th>
+    <th onclick="sortTableBy('brand')" style="cursor: pointer;">Brand</th>
+    <th onclick="sortTableBy('binder')" style="cursor: pointer;">Binder</th>
+    <th onclick="sortTableBy('filler')" style="cursor: pointer;">Filler</th>
+    <th onclick="sortTableBy('wrapper')" style="cursor: pointer;">Wrapper</th>
+    <th onclick="sortTableBy('origin')" style="cursor: pointer;">Origin</th>
+    <th onclick="sortTableBy('rating')" style="cursor: pointer;">Rating</th>
+    <th onclick="sortTableBy('notes')" style="cursor: pointer;">Notes</th>
+    <th>Action</th>
+  </tr>
                 <!--   
                 <tr>
                     <td>Vintage 1990</td>
@@ -224,3 +225,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+<th onclick="sortTableBy('name')">Name</th>
+<th onclick="sortTableBy('size')">Size</th>
+<th onclick="sortTableBy('brand')">Brand</th>
+...
+<th onclick="sortTableBy('rating')">Rating</th>
