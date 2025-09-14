@@ -102,5 +102,33 @@ document.getElementById('exportExcelBtn').addEventListener('click', () => {
   XLSX.writeFile(workbook, "Cigar_Journal.xlsx");
 });
 
+document.getElementById('importExcelInput').addEventListener('change', function (e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const data = new Uint8Array(event.target.result);
+    const workbook = XLSX.read(data, { type: 'array' });
+
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const importedData = XLSX.utils.sheet_to_json(worksheet);
+
+    if (!Array.isArray(importedData) || importedData.length === 0) {
+      alert("Excel file appears to be empty or improperly formatted.");
+      return;
+    }
+
+    // Merge into existing cigars or replace entirely (here we merge)
+    cigars = [...cigars, ...importedData];
+    localStorage.setItem('cigars', JSON.stringify(cigars));
+    renderTable();
+    alert("Records imported successfully!");
+  };
+
+  reader.readAsArrayBuffer(file);
+});
+
 
 });

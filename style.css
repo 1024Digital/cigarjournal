@@ -73,6 +73,7 @@ textarea {
 }
 
 /* Button Styles */
+/* Delete & Edit */
 .btn-danger {
   background-color: #b22222;
   border: none;
@@ -81,6 +82,7 @@ textarea {
   background-color: #ff4444;
 }
 
+/* Export */
 .btn-success {
   background-color: #28a745;
   border: none;
@@ -88,6 +90,26 @@ textarea {
 .btn-success:hover {
   background-color: #218838;
 }
+
+/* Import */
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.note{
+    color:var(--light-cream);
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    margin-top:10px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
 
 /* Footer Styles */
 
